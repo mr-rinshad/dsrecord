@@ -58,7 +58,23 @@ void deleteNode(int value) {
     free(temp);
 }
 
-// Display the list
+// Search for a node
+void search(int value) {
+    struct Node *temp = head;
+    int position = 1;
+
+    while(temp != NULL) {
+        if(temp->data == value) {
+            printf("Value %d found at position %d.\n", value, position);
+            return;
+        }
+        temp = temp->next;
+        position++;
+    }
+    printf("Value %d not found in the list.\n", value);
+}
+
+// Display list
 void display() {
     struct Node *temp = head;
     if(head == NULL) {
@@ -71,26 +87,12 @@ void display() {
     }
     printf("NULL\n");
 }
-void search(int key){
-		  struct node *ptr=head;
-		  int pos=0;
 
-		  while(ptr!=NULL){
-			  if (ptr->data==key){
-				  printf("Data found at position %d \n",pos);
-				  return;
-			  }
-
-			  ptr=ptr->link;
-			  pos++;
-		  }
-		  printf("Data not found in the linked list");
-}
 int main() {
     int choice, value;
 
     while(1) {
-        printf("\n1. Insert at Beginning\n2. Insert at End\n3. Delete\n4. Display\n6.Search\n6. Exit\n");
+        printf("\n1. Insert at Beginning\n2. Insert at End\n3. Delete\n4. Display\n5. Search\n6. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
@@ -116,14 +118,15 @@ int main() {
             case 4:
                 display();
                 break;
+
             case 5:
-                 printf("enter the data to search:");
-                 scanf("%d",&key);
-                 search(key);
-                 break;
-            
+                printf("Enter value to search: ");
+                scanf("%d", &value);
+                search(value);
+                break;
+
             case 6:
-                return 0;
+                exit(0);
 
             default:
                 printf("Invalid choice.\n");
